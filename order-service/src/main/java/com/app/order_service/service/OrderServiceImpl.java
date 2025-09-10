@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     private static final String ADDRESS_SERVICE_URL = "http://localhost:9090/addresses/";
     @Override
     @CircuitBreaker(name = SERVICE_NAME, fallbackMethod = "fallbackMethod")
-    public Type getOrderByPostCode(String orderNumber) {
+    public Order getOrderByPostCode(String orderNumber) {
         Order order = orderRepository.findByOrderNumber(orderNumber)
                 .orElseThrow(() -> new RuntimeException("Order Not Found :: " + orderNumber));
         HttpHeaders headers = new HttpHeaders();
